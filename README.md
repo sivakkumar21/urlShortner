@@ -22,7 +22,7 @@ Request:
 
 Response:
 {
-  "shortUrl": "http://localhost:3000/abc123"
+  "shortUrl": "{BASE_URL}/abc123"
 }
 
 ### Redirect
