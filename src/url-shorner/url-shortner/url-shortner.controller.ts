@@ -1,5 +1,4 @@
 import {
-  BadRequestException,
   Body,
   Controller,
   Get,
@@ -9,6 +8,7 @@ import {
   Redirect,
 } from '@nestjs/common';
 import { UrlShortnerService } from './url-shortner.service';
+import { CreateShortUrlDTO } from './dto/url.shortend.dto';
 
 @Controller('')
 export class UrlShortnerController {
@@ -32,19 +32,10 @@ export class UrlShortnerController {
   }
 
   @Post('/shortenUrl')
-  getShortUrl(@Body() body: { longUrl: string }) {
-    const longUrl = body.longUrl || '';
-    if (!longUrl) {
-      throw new BadRequestException('longUrl is required');
-    }
+  getShortUrl(@Body() body: CreateShortUrlDTO) {
+    const longUrl = body.longUrl;
+
     const shortUrl = this.urlShortnerService.shortern(longUrl);
-    if (shortUrl) {
-      return {
-        shortUrl,
-      };
-    } else
-      return {
-        shortUrl: '',
-      };
+    return { shortUrl };
   }
 }
